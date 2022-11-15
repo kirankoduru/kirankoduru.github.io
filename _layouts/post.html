@@ -1,0 +1,44 @@
+---
+layout: default
+---
+<div class="post">
+
+  <article class="post-content">
+   
+    <h2 class="post-title">{{ page.title }}</h2>
+
+    {% if page.note %}
+    <div class="note">{{ page.note }}</div>
+    {% endif %}
+
+    <!-- CAPTURE READING TIME -->
+    {% capture words %}
+    {{ content | number_of_words | minus: 180 }}
+    {% endcapture %}
+    <!-- /CAPTURE READING TIME -->
+    
+    <span class="text-gray">{% if page.author %}{{ page.author }}  •  {% endif %}{{ page.date | date: "%b %-d, %Y" }}   
+    {% unless words contains "-" %}
+       • {{ words | plus: 180 | divided_by: 180 | append: " minutes to read" }}
+    {% endunless %}
+    {% if page.updated %}
+      •  Last Updated: {{ page.updated | date: "%b %-d, %Y"}}
+    {% endif %}
+    </span>
+
+    {% if page.image %}
+    <div class="image">
+      <img src="{{ page.image }}" width="740">
+    </div>
+    {% endif %}
+
+    {{ content }}
+  </article>
+
+  <!-- SIGNUP FORM -->
+  <div class="signup-form">
+    {% include scrapybook.html %}
+    {% include feedburneremailform.html %}
+  </div>
+
+</div>

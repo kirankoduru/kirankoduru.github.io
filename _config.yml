@@ -1,0 +1,24 @@
+# Site settings
+title: Musings of a programmer
+description: Programmer. Photographer. Brewer.
+author: Kiran Koduru
+paginate : 5
+
+paginate_path: "/:num/"
+url: https://kirankoduru.github.io
+baseurl: 
+
+# Outputtin
+permalink: /:categories/:title.html
+
+# Build settings
+markdown: kramdown
+
+kramdown:
+  input: GFM
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-paginate
+  - jekyll-seo-tag
+  - jekyll-last-modified-at

@@ -1,0 +1,67 @@
+---
+layout: default
+---
+
+<div class="home">
+  <div class="col-left">
+    <ul class="post-list">
+    {% for post in paginator.posts %}
+      <li>
+        <h3>
+          <a class="post-link" href="{{ post.url | prepend: site.url }}" title="{{ post.title }}">{{ post.title | truncate: 47 }}</a>
+        </h3>
+        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+        {% if post.image %}
+        <p></p>
+        <p>
+          <a class="post-image" href="{{ post.url | prepend: site.url }}" title="{{ post.title }}">
+            <img src="{{ post.image }}">
+          </a>
+        </p>
+        {% endif %}
+        <p>
+          {{ post.excerpt | strip_html }}
+        </p>
+        <a class="text-gray" href="{{ post.url | prepend: site.url }}">Continue Reading...</a>
+      </li>
+    {% endfor %}
+    </ul>
+
+    <!-- Pagination links -->
+    <div class="pagination">
+      <span class="page-numbers">
+        <!-- post start number -->
+        {% if paginator.page > 1 %}
+          {% assign start_num = paginator.page | minus: 1 | times: paginator.per_page | plus: 1 %}
+        {% else %}
+          {% assign start_num = paginator.page %}
+        {% endif %}
+        
+        <!-- post end number -->
+        {% assign end_num = paginator.page|times:paginator.per_page %}
+        {% if end_num < paginator.total_posts %}
+          {% assign end_num = paginator.page|times:paginator.per_page %}
+        {% else %}
+          {% assign end_num = paginator.total_posts %}
+        {% endif %}
+
+        <span>Page: {{ paginator.page }} of {{ paginator.total_pages }} ({{ start_num }}-{{ end_num }} of {{ paginator.total_posts }})</span>
+      </span>
+      <span class="arrows">
+        {% if paginator.previous_page %}
+          <a href="{{ paginator.previous_page_path }}" class="previous"><i class="fa fa-caret-left"></i>&nbsp;Prev</a>
+        {% else %}
+          <span class="previous"><i class="fa fa-caret-left"></i>&nbsp;Prev</span>
+        {% endif %}
+        {% if paginator.next_page %}
+          <a href="{{ paginator.next_page_path }}" class="next">Next&nbsp;<i class="fa fa-caret-right"></i></a>
+        {% else %}
+          <span class="next ">Next&nbsp;<i class="fa fa-caret-right"></i></span>
+        {% endif %}
+      </span>
+    </div>  
+    <!-- /Pagination links -->
+
+  </div>
+  <div class="clear-fix"></div>
+</div>
